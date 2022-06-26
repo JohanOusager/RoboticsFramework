@@ -5,14 +5,26 @@
 #include "geometry/Cuboid.hpp"
 #include "simulation/GlutSimulationWrapper.hpp"
 
+struct Color 
+{
+    GLfloat rgb[3] = {1.0, 1.0, 1.0};
+    Color(double red, double green, double blue)
+    {
+        rgb[0] = red;
+        rgb[1] = green;
+        rgb[2] = blue;
+    };
+};
+
+
 class GlutSimulation : public GlutSimulationWrapper
 {
 private:
     std::vector<std::pair<std::shared_ptr<Vector3d>, std::shared_ptr<Vector3d>>> _lines;
     std::vector<std::shared_ptr<Cuboid>> _cuboids;
 
-    void drawLine(const Vector3d& start, const Vector3d& end);
-    void drawCuboid(const Cuboid & cuboid);
+    void drawLine(const Vector3d& start, const Vector3d& end, const Color& color = {1.0, 1.0, 1.0});
+    void drawCuboid(const Cuboid & cuboid, const Color& color = {1.0, 1.0, 1.0});
 
     virtual void display() override;
 	virtual void specialKey( int key, int x, int y ) override;

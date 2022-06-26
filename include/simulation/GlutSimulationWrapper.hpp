@@ -21,23 +21,18 @@ static GlutSimulationWrapper* glut_simulation_wrapper;
 class GlutSimulationWrapper
 {
     private:
-    uint _windowWidth;
-    uint _windowHeight;
-    std::string _name;
+    uint _windowWidth = 480;
+    uint _windowHeight = 360;
+    double dim = 10.0;
+    std::string _name = "GLUT Simulation";
 
 
     std::pair<std::string, int> _menuEntry;
     int _menuBinding;
 
-    /*  Display view */
-    int th = 0;  /* azimuth of view angle */
-    int ph = 0;  /* elevation of view angle */
-    int dim = 10;
-
     public:
 
     // Main
-
     GlutSimulationWrapper();
 
     void run(int argc, char *argv[]);

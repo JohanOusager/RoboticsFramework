@@ -24,19 +24,10 @@ void GlutSimulation::display()
   glRotated(ph, 1, 0, 0);
   glRotated(th, 0, 1, 0);
 
-  double len = 2.0;
-  glColor3f(1.0, 0.0, 0.0);
-  glBegin(GL_LINES);
-  glColor3f(1.0, 0.0, 0.0);
-  glVertex3d(0, 0, 0);
-  glVertex3d(len, 0, 0);
-  glColor3f(0.0, 1.0, 0.0);
-  glVertex3d(0, 0, 0);
-  glVertex3d(0, len, 0);
-  glColor3f(0.0, 0.0, 1.0);
-  glVertex3d(0, 0, 0);
-  glVertex3d(0, 0, len);
-  glEnd();
+  double len = 2.5;
+  drawLine(Vector3d(0.0, 0.0, 0.0), Vector3d(len * 1.0, 0.0, 0.0), Color(1.0, 0.0, 0.0));
+  drawLine(Vector3d(0.0, 0.0, 0.0), Vector3d(0.0, len * 1.0, 0.0), Color(0.0, 1.0, 0.0));
+  drawLine(Vector3d(0.0, 0.0, 0.0), Vector3d(0.0, 0.0, len * 1.0), Color(0.0, 0.0, 1.0));
 
   for (int ci = 0; ci < _cuboids.size(); ci++)
   {
@@ -72,32 +63,37 @@ void GlutSimulation::specialKey(int key, int x, int y)
   /*  Keep angles to +/-360 degrees */
   th %= 360;
   ph %= 360;
-  
+
   GlutSimulationWrapper::specialKey(key, x, y);
   glutPostRedisplay();
 }
 
 // Drawing functions                  //
 
-void GlutSimulation::drawLine(const Vector3d &start, const Vector3d &end)
+void GlutSimulation::drawLine(const Vector3d &start, const Vector3d &end, const Color &color)
 {
-  glBegin(GL_LINE);
-  glColor3f(1, 1, 1);
-  glVertex3f(start[0], start[1], start[2]);
+  glBegin(GL_LINES);
+  glColor3f(color.rgb[0], color.rgb[1], color.rgb[2]);
+  glVertex3d(start[0], start[1], start[2]);
   // std::cout << start[2] << std::endl;
-  glColor3f(1, 1, 1);
-  glVertex3f(end[0], end[1], end[2]);
+  glVertex3d(end[0], end[1], end[2]);
   std::cout << "Line " << start[0] << " " << start[1] << " " << start[2] << "    " << end[0] << " " << end[1] << " " << end[2] << std::endl;
   glEnd();
 }
 
-void GlutSimulation::drawCuboid(const Cuboid &cuboid)
+void GlutSimulation::drawCuboid(const Cuboid &cuboid, const Color &color)
 {
   // std::cout << "Cube drawn!" << std::endl;
   for (int i = 0; i < 8; i++)
   {
-    drawLine(cuboid[i], cuboid[(i + 1) % 8]);
-    // std::cout << cuboid[i][0] << "   " << cuboid[i][1] << "   " << cuboid[i][2]  <<  " Drawing line " << i << std::endl;
+    for (int q = 0; q < 8; q++)
+    {
+      if (q == i)
+        continue;
+      // drawLine(cuboid[i], cuboid[(i + 1) % 8]);
+      drawLine(cuboid[i], cuboid[q], color);
+      // std::cout << cuboid[i][0] << "   " << cuboid[i][1] << "   " << cuboid[i][2]  <<  " Drawing line " << i << std::endl;
+    }
   }
 }
 

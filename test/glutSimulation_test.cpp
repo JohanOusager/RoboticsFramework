@@ -12,16 +12,19 @@
 #include <memory>
 #include <cmath>
 
-/*
+
 int main(int argc, char** argv)
 {
   GlutSimulation sim;
+  std::shared_ptr<Pose> pose = std::make_shared<Pose>( Vector3d(1.0, 1.5, 1.0), Quaternion::IDENTITY());
+  std::shared_ptr<Cuboid> cube = std::make_shared<Cuboid>(pose, 2.0, 3.0, 2.0);
+  sim.addCuboid(cube);
   sim.run(argc, argv);
   
   return 0;
 }
-*/
 
+/*
 
 int main(int argc, char** argv)
 {
@@ -37,3 +40,5 @@ int main(int argc, char** argv)
     sim.run(argc, argv);
     return 0; 
 }
+
+*/
