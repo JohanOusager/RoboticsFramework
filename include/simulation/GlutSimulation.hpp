@@ -1,11 +1,11 @@
 #pragma once
 #include <iostream>
-#include <GL/glut.h>
+#include <vector>
 
 #include "geometry/Cuboid.hpp"
-#include "GLUT-Object-Oriented-Framework/src/GlutFramework.h"
+#include "simulation/GlutSimulationWrapper.hpp"
 
-class GlutSimulation : public glutFramework::GlutFramework
+class GlutSimulation : public GlutSimulationWrapper
 {
 private:
     std::vector<std::pair<std::shared_ptr<Vector3d>, std::shared_ptr<Vector3d>>> _lines;
@@ -13,7 +13,14 @@ private:
 
     void drawLine(const Vector3d& start, const Vector3d& end);
     void drawCuboid(const Cuboid & cuboid);
-    virtual void display(float dTime) override;
+
+    virtual void display() override;
+	virtual void specialKey( int key, int x, int y ) override;
+
+
+    /*  Display view */
+    int th = 0;  /* azimuth of view angle */
+    int ph = 0;  /* elevation of view angle */
 
     /* data */
 public:

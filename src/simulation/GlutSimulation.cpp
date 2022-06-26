@@ -10,28 +10,34 @@ GlutSimulation::~GlutSimulation()
 {
 }
 
-
 // GLUT overrides                     //
 
-void GlutSimulation::display(float dTime)
+void GlutSimulation::display()
 {
-		
-		static int frame = 0;
-		std::cout << "GlutFramework Display: Frame: " << frame << ", dt(sec): " << dTime << ", Position: " << position << std::endl;
-		++frame;
-		
 
-		// DEMO: Create a teapot and move it back and forth on the x-axis
-		glTranslatef(position, 0.0f, 0.0f);
-		glutSolidTeapot(2.5); 
-		if(position > 4 && direction > 0) {
-			direction = -1.0 / FRAME_TIME;
-		} else if(position < -4 && direction < 0) {
-			direction = 1.0 / FRAME_TIME;
-		}		
-		position += direction;
+  /*  Clear the image */
+  glClear(GL_COLOR_BUFFER_BIT);
+  /*  Reset previous transforms */
+  glLoadIdentity();
 
-  /*
+  /*  Set View Angle */
+  glRotated(ph, 1, 0, 0);
+  glRotated(th, 0, 1, 0);
+
+  double len = 2.0;
+  glColor3f(1.0, 0.0, 0.0);
+  glBegin(GL_LINES);
+  glColor3f(1.0, 0.0, 0.0);
+  glVertex3d(0, 0, 0);
+  glVertex3d(len, 0, 0);
+  glColor3f(0.0, 1.0, 0.0);
+  glVertex3d(0, 0, 0);
+  glVertex3d(0, len, 0);
+  glColor3f(0.0, 0.0, 1.0);
+  glVertex3d(0, 0, 0);
+  glVertex3d(0, 0, len);
+  glEnd();
+
   for (int ci = 0; ci < _cuboids.size(); ci++)
   {
     drawCuboid(*_cuboids[ci]);
@@ -41,29 +47,57 @@ void GlutSimulation::display(float dTime)
     drawLine(*_lines[li].first, *_lines[li].second);
   }
 
-	glutSolidTeapot(2.5); 
-  */
+  glFlush();
+  glutSwapBuffers();
+}
 
+void GlutSimulation::specialKey(int key, int x, int y)
+{
+  /*  Right arrow key - increase azimuth by 5 degrees */
+  if (key == GLUT_KEY_RIGHT)
+  {
+    th += 5;
+    // std::cout << "pressed right key " << key << std::endl;
+  }
+  /*  Left arrow key - decrease azimuth by 5 degrees */
+  else if (key == GLUT_KEY_LEFT)
+    th -= 5;
+  /*  Up arrow key - increase elevation by 5 degrees */
+  else if (key == GLUT_KEY_UP)
+    ph += 5;
+  /*  Down arrow key - decrease elevation by 5 degrees */
+  else if (key == GLUT_KEY_DOWN)
+    ph -= 5;
+
+  /*  Keep angles to +/-360 degrees */
+  th %= 360;
+  ph %= 360;
+  
+  GlutSimulationWrapper::specialKey(key, x, y);
+  glutPostRedisplay();
 }
 
 // Drawing functions                  //
 
-void GlutSimulation::drawLine(const Vector3d& start, const Vector3d& end)
+void GlutSimulation::drawLine(const Vector3d &start, const Vector3d &end)
 {
   glBegin(GL_LINE);
-  //glColor3f(1, 0, 0);
+  glColor3f(1, 1, 1);
   glVertex3f(start[0], start[1], start[2]);
+  // std::cout << start[2] << std::endl;
+  glColor3f(1, 1, 1);
   glVertex3f(end[0], end[1], end[2]);
+  std::cout << "Line " << start[0] << " " << start[1] << " " << start[2] << "    " << end[0] << " " << end[1] << " " << end[2] << std::endl;
   glEnd();
 }
 
 void GlutSimulation::drawCuboid(const Cuboid &cuboid)
 {
-  std::cout << "Cube drawn!" << std::endl;
+  // std::cout << "Cube drawn!" << std::endl;
   for (int i = 0; i < 8; i++)
   {
-    drawLine(cuboid[i], cuboid[(i+1)%8]);
-    std::cout << cuboid[i][0] << "   " << cuboid[i][1] << "   " << cuboid[i][2]  <<  " Drawing line " << i << std::endl;
+    drawLine(cuboid[i], cuboid[(i + 1) % 8]);
+    // std::cout << cuboid[i][0] << "   " << cuboid[i][1] << "   " << cuboid[i][2]  <<  " Drawing line " << i << std::endl;
   }
 }
 
@@ -73,10 +107,9 @@ void GlutSimulation::addLine(const std::shared_ptr<Vector3d> start, const std::s
 {
   _lines.push_back(std::pair<std::shared_ptr<Vector3d>, std::shared_ptr<Vector3d>>(start, end));
 }
-    
+
 void GlutSimulation::addCuboid(const std::shared_ptr<Cuboid> cuboid)
 {
-  std::cout << "Cube added!" << std::endl;
+  // std::cout << "Cube added!" << std::endl;
   _cuboids.push_back(cuboid);
 }
-
