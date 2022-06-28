@@ -31,11 +31,27 @@ void GlutSimulationWrapper::setInstance()
 
 void GlutSimulationWrapper::setWindowSize(const uint &width, const uint &height)
 {
+  _windowWidth = width;
+  _windowHeight = height;
 }
 
 void GlutSimulationWrapper::setName(std::string name)
 {
+  _name = name;
 }
+
+void GlutSimulationWrapper::setOrthogonalProjection(const double& left, const double& right, const double& bottom, const double& top, const double& near, const double& far)
+{
+  _projection[0] = left;
+  _projection[1] = right;
+
+  _projection[2] = bottom;
+  _projection[3] = top;
+
+  _projection[4] = near;
+  _projection[5] = far;
+}
+
 
 void GlutSimulationWrapper::setMenuEntry(const std::string &menuLabel, const int &menuKey)
 {
@@ -51,12 +67,10 @@ void GlutSimulationWrapper::setMenuBinding(const int &menuBinding)
 
 void GlutSimulationWrapper::display()
 {
-
-  /*  Clear the image */
   glClear(GL_COLOR_BUFFER_BIT);
-  /*  Reset previous transforms */
   glLoadIdentity();
 
+  // Hard coded 3d frame
   double len = 2.0;
   glColor3f(1.0, 0.0, 0.0);
   glBegin(GL_LINES);
@@ -83,8 +97,7 @@ void GlutSimulationWrapper::reshape(int width, int height)
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
 
-  // orthogonal projection
-  glOrtho(-dim * w2h, +dim * w2h, -dim, +dim, -dim, +dim);
+  glOrtho(_projection[0] * w2h, _projection[1] * w2h, _projection[2], _projection[3], _projection[4], _projection[5]);
 
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();

@@ -23,7 +23,7 @@ class GlutSimulationWrapper
     private:
     uint _windowWidth = 480;
     uint _windowHeight = 360;
-    double dim = 10.0;
+    double _projection[6] = {-10.0, 10.0, -10.0, 10.0, -10.0, 10.0};
     std::string _name = "GLUT Simulation";
 
 
@@ -45,6 +45,8 @@ class GlutSimulationWrapper
     void setWindowSize(const uint& width, const uint& height);
 
     void setName(std::string name);
+
+    void setOrthogonalProjection(const double& left, const double& right, const double& bottom, const double& top, const double& near, const double& far);
 
     void setMenuEntry(const std::string&  menuLabel, const int&  menuKey);
 

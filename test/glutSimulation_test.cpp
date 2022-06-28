@@ -16,8 +16,8 @@
 int main(int argc, char** argv)
 {
   GlutSimulation sim;
-  std::shared_ptr<Pose> pose = std::make_shared<Pose>( Vector3d(1.0, 1.5, 1.0), Quaternion::IDENTITY());
-  std::shared_ptr<Cuboid> cube = std::make_shared<Cuboid>(pose, 2.0, 3.0, 2.0);
+  std::shared_ptr<Pose> pose = std::make_shared<Pose>( Vector3d(0.5, 0.5, 0.5), Quaternion::IDENTITY());
+  std::shared_ptr<Cuboid> cube = std::make_shared<Cuboid>(pose, 1.0, 1.0, 1.0);
   sim.addCuboid(cube);
   sim.run(argc, argv);
   

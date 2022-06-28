@@ -75,9 +75,8 @@ void GlutSimulation::drawLine(const Vector3d &start, const Vector3d &end, const 
   glBegin(GL_LINES);
   glColor3f(color.rgb[0], color.rgb[1], color.rgb[2]);
   glVertex3d(start[0], start[1], start[2]);
-  // std::cout << start[2] << std::endl;
   glVertex3d(end[0], end[1], end[2]);
-  std::cout << "Line " << start[0] << " " << start[1] << " " << start[2] << "    " << end[0] << " " << end[1] << " " << end[2] << std::endl;
+  //std::cout << "Line " << start[0] << " " << start[1] << " " << start[2] << "    " << end[0] << " " << end[1] << " " << end[2] << std::endl;
   glEnd();
 }
 
@@ -86,6 +85,24 @@ void GlutSimulation::drawCuboid(const Cuboid &cuboid, const Color &color)
   // std::cout << "Cube drawn!" << std::endl;
   for (int i = 0; i < 8; i++)
   {
+    //drawLine(cuboid[i], cuboid[(i+1)%8]);
+    //drawLine(cuboid[i], cuboid[(i+3)%8]);
+    //drawLine(cuboid[i], cuboid[(i+1)%8]);
+
+    std::cout << i << " " << cuboid[i][0] << " "  << cuboid[i][1] << " "  << cuboid[i][2] << " " << std::endl; 
+    drawLine(cuboid[0], cuboid[1]);
+    drawLine(cuboid[0], cuboid[2]);
+    drawLine(cuboid[0], cuboid[7]);
+
+    drawLine(cuboid[4], cuboid[5]);
+    drawLine(cuboid[4], cuboid[6]);
+    drawLine(cuboid[5], cuboid[3]); // +1, +2, +7
+
+    drawLine(cuboid[])
+        //[+ + +] [+ + -] [+ - +] [+ - -]  [- - +] [- - -] [- - +] [- + -] [- + +] 
+
+    continue;
+
     for (int q = 0; q < 8; q++)
     {
       if (q == i)
@@ -94,6 +111,7 @@ void GlutSimulation::drawCuboid(const Cuboid &cuboid, const Color &color)
       drawLine(cuboid[i], cuboid[q], color);
       // std::cout << cuboid[i][0] << "   " << cuboid[i][1] << "   " << cuboid[i][2]  <<  " Drawing line " << i << std::endl;
     }
+    
   }
 }
 
