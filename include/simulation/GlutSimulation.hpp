@@ -19,7 +19,7 @@ struct Color
 
 class GlutSimulation : public GlutSimulationWrapper
 {
-private:
+protected:
     std::vector<std::pair<std::shared_ptr<Vector3d>, std::shared_ptr<Vector3d>>> _lines;
     std::vector<std::shared_ptr<Cuboid>> _cuboids;
 
@@ -28,7 +28,6 @@ private:
 
     virtual void display() override;
 	virtual void specialKey( int key, int x, int y ) override;
-
 
     /*  Display view */
     int th = 0;  /* azimuth of view angle */

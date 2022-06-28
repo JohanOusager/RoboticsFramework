@@ -1,4 +1,4 @@
-#include "../include/simulation/GlutSimulation.hpp"
+#include "../include/simulation/BoxPoseSimulation.hpp"
 
 #include "math/Pose.hpp"
 #include "math/Vector3d.hpp"
@@ -14,10 +14,7 @@
 
 int main(int argc, char** argv)
 {
-  GlutSimulation sim;
-  std::shared_ptr<Pose> pose = std::make_shared<Pose>( Vector3d(0.5, 0.5, 0.5), Quaternion::IDENTITY());
-  std::shared_ptr<Cuboid> cube = std::make_shared<Cuboid>(pose, 1.0, 1.0, 1.0);
-  sim.addCuboid(cube);
+  BoxPoseSimulation sim;
   sim.run(argc, argv);
   
   return 0;

@@ -39,3 +39,25 @@ Pose Pose::IDENTITY()
 {
     return Pose(Vector3d::ZERO(), Quaternion::IDENTITY());
 }
+
+
+Pose& Pose::operator=(const Pose& otherPose)
+{
+    _rotation = otherPose._rotation;
+    _translation = otherPose._translation;
+    return *this;
+}
+
+Pose Pose::operator*(const Pose& otherPose) const
+{
+    return Pose(
+        _translation + otherPose._translation * _rotation, 
+        _rotation * otherPose._rotation
+    );
+}
+
+Pose& Pose::operator*=(const Pose& otherPose)
+{
+    *this = *this *otherPose;
+    return *this;    
+}

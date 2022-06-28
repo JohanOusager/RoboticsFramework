@@ -85,33 +85,23 @@ void GlutSimulation::drawCuboid(const Cuboid &cuboid, const Color &color)
   // std::cout << "Cube drawn!" << std::endl;
   for (int i = 0; i < 8; i++)
   {
-    //drawLine(cuboid[i], cuboid[(i+1)%8]);
-    //drawLine(cuboid[i], cuboid[(i+3)%8]);
-    //drawLine(cuboid[i], cuboid[(i+1)%8]);
-
-    std::cout << i << " " << cuboid[i][0] << " "  << cuboid[i][1] << " "  << cuboid[i][2] << " " << std::endl; 
     drawLine(cuboid[0], cuboid[1]);
     drawLine(cuboid[0], cuboid[2]);
-    drawLine(cuboid[0], cuboid[7]);
+
+    drawLine(cuboid[1], cuboid[3]);
+    drawLine(cuboid[1], cuboid[7]);
+
+    drawLine(cuboid[2], cuboid[3]);
+    drawLine(cuboid[2], cuboid[4]);
 
     drawLine(cuboid[4], cuboid[5]);
     drawLine(cuboid[4], cuboid[6]);
-    drawLine(cuboid[5], cuboid[3]); // +1, +2, +7
 
-    drawLine(cuboid[])
-        //[+ + +] [+ + -] [+ - +] [+ - -]  [- - +] [- - -] [- - +] [- + -] [- + +] 
+    drawLine(cuboid[5], cuboid[3]);
+    drawLine(cuboid[5], cuboid[7]);
 
-    continue;
-
-    for (int q = 0; q < 8; q++)
-    {
-      if (q == i)
-        continue;
-      // drawLine(cuboid[i], cuboid[(i + 1) % 8]);
-      drawLine(cuboid[i], cuboid[q], color);
-      // std::cout << cuboid[i][0] << "   " << cuboid[i][1] << "   " << cuboid[i][2]  <<  " Drawing line " << i << std::endl;
-    }
-    
+    drawLine(cuboid[6], cuboid[7]);
+    drawLine(cuboid[6], cuboid[0]);
   }
 }
 
@@ -119,6 +109,7 @@ void GlutSimulation::drawCuboid(const Cuboid &cuboid, const Color &color)
 
 void GlutSimulation::addLine(const std::shared_ptr<Vector3d> start, const std::shared_ptr<Vector3d> end)
 {
+  // std::cout << "Line added!" << std::endl;
   _lines.push_back(std::pair<std::shared_ptr<Vector3d>, std::shared_ptr<Vector3d>>(start, end));
 }
 

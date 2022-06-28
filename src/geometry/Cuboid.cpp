@@ -9,6 +9,11 @@ Cuboid::Cuboid(const std::shared_ptr<Pose> pose, const double &widht, const doub
 Cuboid::~Cuboid()
 {
 }
+    
+std::shared_ptr<Pose> Cuboid::pose()
+{
+    return _centre;
+}
 
 Vector3d Cuboid::operator[](const uint &i) const
 {
@@ -17,6 +22,29 @@ Vector3d Cuboid::operator[](const uint &i) const
             (std::string("Cuboid can only be indexed in the [0-7] range. Tried ") 
             + std::to_string(i)));
     return _corners[i];
+}
+
+Cuboid& Cuboid::operator=(const Cuboid &otherCuboid)
+{
+    _centre = otherCuboid._centre;
+    _width = otherCuboid._width;
+    _length = otherCuboid._length;
+    _height = otherCuboid._height;
+    updateCorners();
+    return *this;
+}
+
+Cuboid Cuboid::operator*(const Pose &transform3d) const
+{
+    return Cuboid(std::make_shared<Pose>(*_centre * transform3d), _width, _length, _height);
+}
+
+Cuboid& Cuboid::operator*=(const Pose &transform3d)
+{
+    *this = *this * transform3d;
+    updateCorners();
+
+    return *this;
 }
 
 void Cuboid::updateCorners()

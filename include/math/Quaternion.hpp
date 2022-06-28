@@ -15,7 +15,6 @@ public:
     // Constructors
 
     Quaternion(double w, double xi, double  yj, double zk);
-    //Quaternion(const AxisAngle &axis_angle_rotation);
 
     Quaternion();
     ~Quaternion();

@@ -24,4 +24,10 @@ public:
     ~Cuboid();
 
     Vector3d operator[](const uint &i) const;
+    Cuboid& operator=(const Cuboid &otherCuboid);
+    Cuboid operator*(const Pose &pose) const;
+    Cuboid& operator*=(const Pose &pose);
+
+    std::shared_ptr<Pose> pose();
+
 };

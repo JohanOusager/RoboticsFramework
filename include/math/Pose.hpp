@@ -24,5 +24,9 @@ public:
     void setRotation(const Quaternion & rotation);
 
     static Pose IDENTITY();
+
+    Pose& operator=(const Pose& otherPose);
+    Pose operator*(const Pose& otherPose) const;
+    Pose& operator*=(const Pose& otherPose);
 };
 
