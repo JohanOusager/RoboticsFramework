@@ -36,4 +36,28 @@ namespace math
         std::cout << "toAxisAngle not implemented!" << std::endl;
         return AxisAngle(0.0, Vector3d::ZERO());
     }
+
+    inline const Vector3d& min(const Vector3d& a, const Vector3d& b, int dimension)
+    {
+        if (a[dimension] <= b[dimension])
+            return a;
+        else
+            return b;
+    }
+
+    inline const Vector3d& max(const Vector3d& a, const Vector3d& b, int dimension)
+    {
+        if (a[dimension] >= b[dimension])
+            return a;
+        else
+            return b;
+    }
+
+    inline bool lessThan(const Vector3d& a, const Vector3d& b, int dimension)
+    {
+        if (a == max(a, b, dimension))
+            return false;
+        return true;
+    }
+
 };

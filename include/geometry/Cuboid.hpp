@@ -28,6 +28,9 @@ public:
     Cuboid operator*(const Pose &pose) const;
     Cuboid& operator*=(const Pose &pose);
 
-    std::shared_ptr<Pose> pose();
+    void setPose( std::shared_ptr<Pose> pose);
+    std::shared_ptr<const Pose> getPose() const;
+
+    //std::shared_ptr<Pose> pose() const;
 
 };

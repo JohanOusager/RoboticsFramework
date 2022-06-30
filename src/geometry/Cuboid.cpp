@@ -10,7 +10,12 @@ Cuboid::~Cuboid()
 {
 }
     
-std::shared_ptr<Pose> Cuboid::pose()
+void Cuboid::setPose(std::shared_ptr<Pose> pose)
+{
+    _centre = pose;
+}
+
+std::shared_ptr<const Pose> Cuboid::getPose() const
 {
     return _centre;
 }

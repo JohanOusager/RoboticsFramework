@@ -18,7 +18,7 @@ Vector3d Vector3d::ZERO()
     return Vector3d(0.0, 0.0, 0.0);
 }
 
-Vector3d &Vector3d::operator=(const Vector3d &rhs)
+Vector3d& Vector3d::operator=(const Vector3d &rhs)
 {
     _data[0] = rhs[0];
     _data[1] = rhs[1];
@@ -26,6 +26,13 @@ Vector3d &Vector3d::operator=(const Vector3d &rhs)
 
     return *this;
 }
+
+bool Vector3d::operator==(const Vector3d &rhs) const
+{
+    return ((*this - rhs).magnitude() <= _precision);
+    return (_data[0] - rhs._data[0] && _data[1] == rhs._data[1] && _data[2] == rhs._data[2]);
+}
+
 
 double Vector3d::operator[](const int &i) const
 {
@@ -89,3 +96,8 @@ Vector3d& Vector3d::operator*=(const double& scalar)
 // void Vector3d::normalize()
 //{
 // }
+    
+double Vector3d::magnitude()
+{
+    return std::sqrt(std::pow(_data[0], 2.0) + std::pow(_data[1], 2.0) + std::pow(_data[2], 2.0));
+}
