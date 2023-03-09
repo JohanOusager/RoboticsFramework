@@ -67,9 +67,6 @@ void GlutSimulationWrapper::setMenuBinding(const int &menuBinding)
 
 void GlutSimulationWrapper::display()
 {
-  glClear(GL_COLOR_BUFFER_BIT);
-  glLoadIdentity();
-
   // Hard coded 3d frame
   double len = 2.0;
   glColor3f(1.0, 0.0, 0.0);
@@ -84,9 +81,6 @@ void GlutSimulationWrapper::display()
   glVertex3d(0, 0, 0);
   glVertex3d(0, 0, len);
   glEnd();
-
-  glFlush();
-  glutSwapBuffers();
 }
 
 void GlutSimulationWrapper::reshape(int width, int height)
@@ -121,7 +115,13 @@ void GlutSimulationWrapper::menu(int value) {}
 
 void GlutSimulationWrapper::displayWrapper()
 {
+  glClear(GL_COLOR_BUFFER_BIT);
+  glLoadIdentity();
+
   glut_simulation_wrapper->display();
+  
+  glFlush();
+  glutSwapBuffers();
 }
 
 void GlutSimulationWrapper::reshapeWrapper(int width, int height)

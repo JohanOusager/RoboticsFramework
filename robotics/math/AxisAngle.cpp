@@ -1,5 +1,7 @@
 #include "math/AxisAngle.hpp"
 
+using namespace math;
+
 AxisAngle::AxisAngle(const double &angle, const double & ax, const double & ay,const double & az)
 {
     AxisAngle(angle, Vector3d(ax, ay, az));

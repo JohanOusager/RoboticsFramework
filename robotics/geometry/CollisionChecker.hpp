@@ -1,7 +1,7 @@
 #pragma once
-#include "Cuboid.hpp"
-#include "Math.hpp"
-#include <math>
+#include "geometry/Cuboid.hpp"
+#include "math/Math.hpp"
+#include "math.h"
 
  #include<algorithm>
 
@@ -26,6 +26,15 @@ class CollisionChecker
      * @return Boolean indicating is a collision is possible.
      */
     bool isCollisionAABB(const Cuboid& firstBox, const Cuboid& secondBox);
+
+    /**
+     * @brief Collision check using Oriented Bouding Boxes.
+     * 
+     * @param firstBox 
+     * @param secondBox 
+     * @return Boolean indicating is a collision is possible.
+     */
+    bool isCollisionOBB(const Cuboid& firstBox, const Cuboid& secondBox);
 
     public:
 

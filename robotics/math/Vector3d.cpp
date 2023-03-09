@@ -1,4 +1,6 @@
-#include "math/Vector3d.hpp"
+#include "Vector3d.hpp"
+
+using namespace math;
 
 Vector3d::Vector3d(const double &x, const double &y, const double &z)
     : _data{x, y, z}
@@ -93,11 +95,39 @@ Vector3d& Vector3d::operator*=(const double& scalar)
     return *this = *this * scalar;
 }
 
+Vector3d Vector3d::operator/(const double& scalar) const
+{
+    return Vector3d(_data[0]*1.0/scalar, _data[1]*1.0/scalar, _data[2]*1.0/scalar);
+}
+
+Vector3d& Vector3d::operator/=(const double& scalar)
+{
+    return *this = *this / scalar;
+}
+
 // void Vector3d::normalize()
 //{
 // }
+
+double Vector3d::dot(const Vector3d& rhs) const
+{
+    return (_data[0] * rhs._data[0]) + (_data[1] * rhs._data[1]) + (_data[2] * rhs._data[2]);
+}
+
+Vector3d Vector3d::cross(const Vector3d& rhs) const
+{
+    return Vector3d(_data[1]*rhs[2] - _data[2]*rhs[1],
+                    _data[2]*rhs[0] - _data[0]*rhs[2], 
+                    _data[0]*rhs[1] - _data[1]*rhs[0]
+                    );
+}
+
+Vector3d Vector3d::abs() const
+{
+    return Vector3d(std::abs(_data[0]), std::abs(_data[1]), std::abs(_data[2]));
+}
     
-double Vector3d::magnitude()
+double Vector3d::magnitude() const
 {
     return std::sqrt(std::pow(_data[0], 2.0) + std::pow(_data[1], 2.0) + std::pow(_data[2], 2.0));
 }

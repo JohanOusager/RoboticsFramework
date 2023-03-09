@@ -1,5 +1,7 @@
-#include "math/Quaternion.hpp"
+#include "Quaternion.hpp"
 #include <cmath>
+
+using namespace math;
 
 Quaternion::Quaternion(double w, double xi, double yj, double zk) : _data{w, xi, yj, zk}
 {

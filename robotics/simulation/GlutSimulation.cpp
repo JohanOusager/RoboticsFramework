@@ -14,12 +14,6 @@ GlutSimulation::~GlutSimulation()
 
 void GlutSimulation::display()
 {
-
-  /*  Clear the image */
-  glClear(GL_COLOR_BUFFER_BIT);
-  /*  Reset previous transforms */
-  glLoadIdentity();
-
   /*  Set View Angle */
   glRotated(ph, 1, 0, 0);
   glRotated(th, 0, 1, 0);
@@ -37,9 +31,6 @@ void GlutSimulation::display()
   {
     drawLine(*_lines[li].first, *_lines[li].second);
   }
-
-  glFlush();
-  glutSwapBuffers();
 }
 
 void GlutSimulation::specialKey(int key, int x, int y)
@@ -85,23 +76,23 @@ void GlutSimulation::drawCuboid(const Cuboid &cuboid, const Color &color)
   // std::cout << "Cube drawn!" << std::endl;
   for (int i = 0; i < 8; i++)
   {
-    drawLine(cuboid[0], cuboid[1]);
-    drawLine(cuboid[0], cuboid[2]);
+    drawLine(cuboid[0], cuboid[1], color);
+    drawLine(cuboid[0], cuboid[2], color);
 
-    drawLine(cuboid[1], cuboid[3]);
-    drawLine(cuboid[1], cuboid[7]);
+    drawLine(cuboid[1], cuboid[3], color);
+    drawLine(cuboid[1], cuboid[7], color);
 
-    drawLine(cuboid[2], cuboid[3]);
-    drawLine(cuboid[2], cuboid[4]);
+    drawLine(cuboid[2], cuboid[3], color);
+    drawLine(cuboid[2], cuboid[4], color);
 
-    drawLine(cuboid[4], cuboid[5]);
-    drawLine(cuboid[4], cuboid[6]);
+    drawLine(cuboid[4], cuboid[5], color);
+    drawLine(cuboid[4], cuboid[6], color);
 
-    drawLine(cuboid[5], cuboid[3]);
-    drawLine(cuboid[5], cuboid[7]);
+    drawLine(cuboid[5], cuboid[3], color);
+    drawLine(cuboid[5], cuboid[7], color);
 
-    drawLine(cuboid[6], cuboid[7]);
-    drawLine(cuboid[6], cuboid[0]);
+    drawLine(cuboid[6], cuboid[7], color);
+    drawLine(cuboid[6], cuboid[0], color);
   }
 }
 

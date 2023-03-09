@@ -1,6 +1,9 @@
 #pragma once
+
 #include <stdexcept>
 #include "string"
+
+namespace math {
 
 class Quaternion
 {
@@ -31,7 +34,7 @@ public:
     static Quaternion IDENTITY();
 };
 
-
+}
 /*
 def quaternion_mult(q,r):
     return [r[0]*q[0]-r[1]*q[1]-r[2]*q[2]-r[3]*q[3],
