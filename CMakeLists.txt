@@ -15,6 +15,11 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 #gtest end
 
+# Find GLUT
+find_package(OpenGL REQUIRED)
+find_package(GLUT REQUIRED)
+include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} )
+
 # Headers
 include_directories(
     ${PROJECT_SOURCE_DIR}/robotics
@@ -35,8 +40,11 @@ set(SOURCES
 )
 
 set(SIM_TEST_SRC
+    robotics/simulation/GlutSimulationWrapper.cpp
+    robotics/simulation/GlutSimulation.cpp
     test/glutSimulation_test.cpp
 )
+
 set(BOX_POSE_TEST_SRC 
     test/pose_box_test.cpp
 )
@@ -49,14 +57,8 @@ set(GTEST_SRC
     ${SOURCES}
 )
 
-# Find packages
-find_package(OpenGL REQUIRED)
-find_package(GLUT REQUIRED)
-include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} )
-
-
 # Make executables
-#add_executable(sim_test ${SOURCES} ${SOURCES_EXTERNAL} ${SIM_TEST_SRC})
+add_executable(sim_test ${SOURCES} ${SIM_TEST_SRC})
 #add_executable(pose_box_test ${SOURCES} ${SOURCES_EXTERNAL} ${BOX_POSE_TEST_SRC})
 #add_executable(collision_test ${SOURCES} ${SOURCES_EXTERNAL} ${COLLISION_TEST_SRC})
 
@@ -64,7 +66,7 @@ enable_testing()
 add_executable(gtest_all ${GTEST_SRC} ${SOURCES})
 
 # Link our unit tests against the library we compiled
-#target_link_libraries(sim_test ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
+target_link_libraries(sim_test ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
 #target_link_libraries(pose_box_test ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
 #target_link_libraries(collision_test ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
 

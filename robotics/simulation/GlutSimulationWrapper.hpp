@@ -5,14 +5,13 @@
 #include <iostream>
 
 /* OpenGL and friends */
-#ifdef USEGLEW
-#include <GL/glew.h>
-#endif
-#define GL_GLEXT_PROTOTYPES
-#ifdef __APPLE__
-#include <GLUT/glut.h>
-#else
-#include <GL/glut.h>
+#ifdef _WIN32
+	#include <windows.h>
+	#include <GL/glut.h>
+#elif __APPLE__
+  #include <GLUT/glut.h>
+#elif __linux
+	#include <GL/glut.h>
 #endif
 
 
