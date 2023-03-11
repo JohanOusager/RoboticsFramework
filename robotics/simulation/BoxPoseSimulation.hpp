@@ -9,7 +9,7 @@ namespace simulation
 
 class BoxPoseSimulation : public GlutSimulation
 {
-    public:
+public:
     BoxPoseSimulation();
     void normalKey(unsigned char key, int x, int y) override;
 };

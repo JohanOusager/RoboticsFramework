@@ -9,7 +9,8 @@ namespace simulation
 {
   class BoxCollisionSimulation : public BoxPoseSimulation
   {
-
+    public:
+    
     BoxCollisionSimulation();
 
     void display();

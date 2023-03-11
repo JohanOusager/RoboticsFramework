@@ -36,7 +36,7 @@ add_subdirectory(robotics/simulation)
 set(SOURCES
         ${MATH_SOURCES}
         ${GEOMETRY_SOURCES}
-        #${SIMULATION_SOURCES}
+        ${SIMULATION_SOURCES}
 )
 
 set(SIM_TEST_SRC
@@ -59,18 +59,18 @@ set(GTEST_SRC
 
 # Make executables
 add_executable(sim_test ${SOURCES} ${SIM_TEST_SRC})
-#add_executable(pose_box_test ${SOURCES} ${SOURCES_EXTERNAL} ${BOX_POSE_TEST_SRC})
-#add_executable(collision_test ${SOURCES} ${SOURCES_EXTERNAL} ${COLLISION_TEST_SRC})
+add_executable(pose_box_test ${SOURCES} ${BOX_POSE_TEST_SRC})
+add_executable(collision_test ${SOURCES} ${COLLISION_TEST_SRC})
 
 enable_testing()
 add_executable(gtest_all ${GTEST_SRC} ${SOURCES})
 
 # Link our unit tests against the library we compiled
-target_link_libraries(sim_test ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
-#target_link_libraries(pose_box_test ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
-#target_link_libraries(collision_test ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
+target_link_libraries(sim_test OpenGL::GL GLUT::GLUT)
+target_link_libraries(pose_box_test OpenGL::GL GLUT::GLUT)
+target_link_libraries(collision_test OpenGL::GL GLUT::GLUT)
 
-target_link_libraries(gtest_all GTest::gtest_main ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
+target_link_libraries(gtest_all GTest::gtest_main OpenGL::GL GLUT::GLUT)
 include(GoogleTest)
 gtest_discover_tests(gtest_all)
 
