@@ -1,9 +1,16 @@
 #pragma once
-#include "geometry/Cuboid.hpp"
+
+#include <math.h>
+
 #include "math/Math.hpp"
-#include "math.h"
+#include "math/RotationMatrix.hpp"
+
+#include "geometry/Cuboid.hpp"
 
  #include<algorithm>
+
+namespace geometry
+{
 
 class CollisionChecker
 {
@@ -43,3 +50,5 @@ class CollisionChecker
 
     bool isCollision(const Cuboid& firstBox, const Cuboid& secondBox);
 };
+
+}

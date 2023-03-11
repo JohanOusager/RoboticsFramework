@@ -10,6 +10,7 @@ namespace math
     class RotationMatrix
     {
 
+public:
         RotationMatrix(/* args */);
         RotationMatrix(const Vector3d &row1, const Vector3d &row2, const Vector3d &row3);
 
@@ -18,7 +19,7 @@ namespace math
             const double &row2col1, const double &row2col2, const double &row2col3,
             const double &row3col1, const double &row3col2, const double &row3col3);
 
-        RotationMatrix IDENTITY();
+        static RotationMatrix IDENTITY();
 
         ~RotationMatrix();
 

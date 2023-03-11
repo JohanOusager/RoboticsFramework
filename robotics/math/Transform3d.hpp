@@ -7,6 +7,7 @@ namespace math
 {
     class Transform3d
     {
+        public:
 
         Transform3d(Vector3d translation, Quaternion rotation);
 
@@ -22,7 +23,7 @@ namespace math
 
         void setRotation(const Quaternion &rotation);
 
-        Transform3d IDENTITY();
+        static Transform3d IDENTITY();
 
         Transform3d& operator=(const Transform3d &otherPose);
 

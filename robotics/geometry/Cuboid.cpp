@@ -1,6 +1,9 @@
 #include "geometry/Cuboid.hpp"
 
-Cuboid::Cuboid(const Transform3d pose, const double &widht, const double &length, const double &height)
+using namespace geometry;
+using namespace math;
+
+Cuboid::Cuboid(const Transform3d& pose, const double &widht, const double &length, const double &height)
     : Shape(pose), _width(widht), _length(length), _height(height)
 {
     updateCorners();
@@ -10,7 +13,7 @@ Cuboid::~Cuboid()
 {
 }
 
-Vector3d Cuboid::operator[](const uint &i) const
+Vertex3d Cuboid::operator[](const uint &i) const
 {
     if (i < 0 || i > 7)
         throw std::runtime_error(

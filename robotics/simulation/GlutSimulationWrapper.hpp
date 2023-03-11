@@ -15,6 +15,10 @@
 #include <GL/glut.h>
 #endif
 
+
+namespace simulation
+{
+
 class GlutSimulationWrapper;
 static GlutSimulationWrapper* glut_simulation_wrapper;
 
@@ -107,3 +111,5 @@ int main(int argc, char *argv[])
 }
 */
 };
+
+}

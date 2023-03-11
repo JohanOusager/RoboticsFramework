@@ -1,9 +1,12 @@
 #include "CollisionChecker.hpp"
 
+using namespace math;
+using namespace geometry;
+
 bool CollisionChecker::isCollisionAABS(const Cuboid &firstCuboid, const Cuboid &secondCuboid)
 {
     double distance = (firstCuboid.getPose().translation() - secondCuboid.getPose().translation()).magnitude();
-    double radii_sum = ((firstCuboid.getPose().translation() - firstCuboid[0]).magnitude() + (secondCuboid.getPose().translation() - secondCuboid[0]).magnitude());
+    double radii_sum = ((firstCuboid.getPose().translation() - firstCuboid[0].getPosition()).magnitude() + (secondCuboid.getPose().translation() - secondCuboid[0].getPosition()).magnitude());
     if (distance <= radii_sum)
     {
         return true;
@@ -21,8 +24,8 @@ bool CollisionChecker::isCollisionAABB(const Cuboid &cuboidA, const Cuboid &cubo
     {
         if (math::lessThan(cuboidA.getPose().translation(), cuboidB.getPose().translation(), dimension))
         {
-            double a_max = cuboidA[0][dimension];
-            double b_min = cuboidB[0][dimension];
+            double a_max = cuboidA[0].getPosition()[dimension];
+            double b_min = cuboidB[0].getPosition()[dimension];
             for (uint i = 1; i < 8; i++)
             {
                 if (a_max > b_min)
@@ -31,8 +34,8 @@ bool CollisionChecker::isCollisionAABB(const Cuboid &cuboidA, const Cuboid &cubo
                 }
                 else
                 {
-                    a_max = std::max(a_max, cuboidA[i][dimension]);
-                    b_min = std::min(b_min, cuboidB[i][dimension]);
+                    a_max = std::max(a_max, cuboidA[i].getPosition()[dimension]);
+                    b_min = std::min(b_min, cuboidB[i].getPosition()[dimension]);
                 }
             }
             if (a_max < b_min)
@@ -47,8 +50,8 @@ bool CollisionChecker::isCollisionAABB(const Cuboid &cuboidA, const Cuboid &cubo
 
 bool CollisionChecker::isCollisionOBB(const Cuboid &cuboidA, const Cuboid &cuboidB)
 {
-    RotationMatrix rotationA = math::toRotationMatrix(cuboidA.getPose().rotation());
-    RotationMatrix rotationB = math::toRotationMatrix(cuboidB.getPose().rotation());
+    RotationMatrix rotationA = RotationMatrix::IDENTITY(); //math::toRotationMatrix(cuboidA.getPose().rotation());
+    RotationMatrix rotationB = RotationMatrix::IDENTITY(); //math::toRotationMatrix(cuboidB.getPose().rotation());
     Vector3d planes[15] = {
         rotationA[0],
         rotationA[1],
@@ -71,8 +74,8 @@ bool CollisionChecker::isCollisionOBB(const Cuboid &cuboidA, const Cuboid &cuboi
         rotationA[2].cross(rotationB[2])
     };
 
-    Vector3d halfDimensionsA = (cuboidA[0] - cuboidA.getPose().translation()).abs()/2.0;
-    Vector3d halfDimensionsB = (cuboidB[0] - cuboidB.getPose().translation()).abs()/2.0;
+    Vector3d halfDimensionsA = (cuboidA[0].getPosition() - cuboidA.getPose().translation()).abs()/2.0;
+    Vector3d halfDimensionsB = (cuboidB[0].getPosition() - cuboidB.getPose().translation()).abs()/2.0;
     Vector3d distance = cuboidA.getPose().translation() - cuboidB.getPose().translation();
 
     if ((halfDimensionsA.dot(planes[0])))

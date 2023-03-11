@@ -1,5 +1,9 @@
 #include "simulation/BoxCollisionSimulation.hpp"
 
+using namespace math;
+using namespace geometry;
+using namespace simulation;
+
 BoxCollisionSimulation::BoxCollisionSimulation()
 {
 }

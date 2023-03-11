@@ -1,5 +1,8 @@
 #include "simulation/BoxPoseSimulation.hpp"
 
+using namespace simulation;
+using namespace math;
+
 BoxPoseSimulation::BoxPoseSimulation()
 {
     //addCuboid(std::make_shared<Cuboid>(std::make_shared<Transform3d>(Transform3d::IDENTITY()), 5.0, 10.0, 2.5));

@@ -1,36 +1,41 @@
 #pragma once
 
-#include "../math/Vector3d.hpp"
-#include "../math/Pose.hpp"
-#include "exception"
+#include <exception>
+#include <memory>
 
-#include "memory"
+#include "geometry/Shape.hpp"
+#include "geometry/Vertex3d.hpp"
 
-class Cuboid
+#include "math/Vector3d.hpp"
+#include "math/Transform3d.hpp"
+
+namespace geometry
 {
-private:
-    Vector3d _corners[8];
-    std::shared_ptr<Pose> _centre;
+    class Cuboid : public Shape
+    {
+    private:
+        Vertex3d _corners[8];
+        //std::shared_ptr<math::Transform3d> _centre;
 
-    double _width;
-    double _length;
-    double _height;
+        double _width;
+        double _length;
+        double _height;
 
-    void updateCorners();
+        void updateCorners();
 
-public:
-    Cuboid(const std::shared_ptr<Pose> pose, const double &widht, const double &length, const double &height);
+    public:
+        Cuboid(const math::Transform3d& pose, const double &widht, const double &length, const double &height);
 
-    ~Cuboid();
+        ~Cuboid();
 
-    Vector3d operator[](const uint &i) const;
-    Cuboid& operator=(const Cuboid &otherCuboid);
-    Cuboid operator*(const Pose &pose) const;
-    Cuboid& operator*=(const Pose &pose);
+        Vertex3d operator[](const uint &i) const;
+        Cuboid &operator=(const Cuboid &otherCuboid);
+        Cuboid operator*(const math::Transform3d &pose) const;
+        Cuboid &operator*=(const math::Transform3d &pose);
 
-    void setPose( std::shared_ptr<Pose> pose);
-    std::shared_ptr<const Pose> getPose() const;
+        void setPose(std::shared_ptr<math::Transform3d> pose);
+        //std::shared_ptr<const math::Transform3d> getPose() const;
 
-    //std::shared_ptr<Pose> pose() const;
-
-};
+        // std::shared_ptr<Pose> pose() const;
+    };
+}

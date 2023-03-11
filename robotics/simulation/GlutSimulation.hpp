@@ -2,8 +2,13 @@
 #include <iostream>
 #include <vector>
 
+#include "math/Vector3d.hpp"
+
 #include "geometry/Cuboid.hpp"
 #include "simulation/GlutSimulationWrapper.hpp"
+
+namespace simulation
+{
 
 struct Color 
 {
@@ -20,11 +25,11 @@ struct Color
 class GlutSimulation : public GlutSimulationWrapper
 {
 protected:
-    std::vector<std::pair<std::shared_ptr<Vector3d>, std::shared_ptr<Vector3d>>> _lines;
-    std::vector<std::shared_ptr<Cuboid>> _cuboids;
+    std::vector<std::pair<std::shared_ptr<math::Vector3d>, std::shared_ptr<math::Vector3d>>> _lines;
+    std::vector<std::shared_ptr<geometry::Cuboid>> _cuboids;
 
-    void drawLine(const Vector3d& start, const Vector3d& end, const Color& color = {1.0, 1.0, 1.0});
-    void drawCuboid(const Cuboid & cuboid, const Color& color = {1.0, 1.0, 1.0});
+    void drawLine(const math::Vector3d& start, const math::Vector3d& end, const Color& color = {1.0, 1.0, 1.0});
+    void drawCuboid(const geometry::Cuboid & cuboid, const Color& color = {1.0, 1.0, 1.0});
 
     virtual void display() override;
 	virtual void specialKey( int key, int x, int y ) override;
@@ -38,6 +43,8 @@ public:
     GlutSimulation();
     ~GlutSimulation();
 
-    void addLine(const std::shared_ptr<Vector3d> start, const std::shared_ptr<Vector3d> end);
-    void addCuboid(const std::shared_ptr<Cuboid> cuboid);
+    void addLine(const std::shared_ptr<math::Vector3d> start, const std::shared_ptr<math::Vector3d> end);
+    void addCuboid(const std::shared_ptr<geometry::Cuboid> cuboid);
 };
+
+}

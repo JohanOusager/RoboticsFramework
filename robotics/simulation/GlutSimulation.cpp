@@ -1,7 +1,10 @@
 #include "simulation/GlutSimulation.hpp"
 
-// Constructors and destructors       //
+using namespace math;
+using namespace geometry;
+using namespace simulation;
 
+// Constructors and destructors       //
 GlutSimulation::GlutSimulation()
 {
 }
@@ -76,23 +79,23 @@ void GlutSimulation::drawCuboid(const Cuboid &cuboid, const Color &color)
   // std::cout << "Cube drawn!" << std::endl;
   for (int i = 0; i < 8; i++)
   {
-    drawLine(cuboid[0], cuboid[1], color);
-    drawLine(cuboid[0], cuboid[2], color);
+    drawLine(cuboid[0].getPosition(), cuboid[1].getPosition(), color);
+    drawLine(cuboid[0].getPosition(), cuboid[2].getPosition(), color);
 
-    drawLine(cuboid[1], cuboid[3], color);
-    drawLine(cuboid[1], cuboid[7], color);
+    drawLine(cuboid[1].getPosition(), cuboid[3].getPosition(), color);
+    drawLine(cuboid[1].getPosition(), cuboid[7].getPosition(), color);
 
-    drawLine(cuboid[2], cuboid[3], color);
-    drawLine(cuboid[2], cuboid[4], color);
+    drawLine(cuboid[2].getPosition(), cuboid[3].getPosition(), color);
+    drawLine(cuboid[2].getPosition(), cuboid[4].getPosition(), color);
 
-    drawLine(cuboid[4], cuboid[5], color);
-    drawLine(cuboid[4], cuboid[6], color);
+    drawLine(cuboid[4].getPosition(), cuboid[5].getPosition(), color);
+    drawLine(cuboid[4].getPosition(), cuboid[6].getPosition(), color);
 
-    drawLine(cuboid[5], cuboid[3], color);
-    drawLine(cuboid[5], cuboid[7], color);
+    drawLine(cuboid[5].getPosition(), cuboid[3].getPosition(), color);
+    drawLine(cuboid[5].getPosition(), cuboid[7].getPosition(), color);
 
-    drawLine(cuboid[6], cuboid[7], color);
-    drawLine(cuboid[6], cuboid[0], color);
+    drawLine(cuboid[6].getPosition(), cuboid[7].getPosition(), color);
+    drawLine(cuboid[6].getPosition(), cuboid[0].getPosition(), color);
   }
 }
 

@@ -30,7 +30,7 @@ add_subdirectory(robotics/simulation)
 
 set(SOURCES
         ${MATH_SOURCES}
-        #${GEOMETRY_SOURCES}
+        ${GEOMETRY_SOURCES}
         #${SIMULATION_SOURCES}
 )
 
@@ -68,7 +68,7 @@ add_executable(gtest_all ${GTEST_SRC} ${SOURCES})
 #target_link_libraries(pose_box_test ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
 #target_link_libraries(collision_test ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
 
-target_link_libraries(gtest_all GTest::gtest_main )
+target_link_libraries(gtest_all GTest::gtest_main ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
 include(GoogleTest)
 gtest_discover_tests(gtest_all)
 

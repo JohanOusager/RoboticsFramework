@@ -1,5 +1,7 @@
 #include "simulation/GlutSimulationWrapper.hpp"
 
+using namespace simulation;
+
 GlutSimulationWrapper::GlutSimulationWrapper()
 {
 }

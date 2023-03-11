@@ -1,11 +1,14 @@
 #include "geometry/Sphere.hpp"
 
+using namespace geometry;
+using namespace math;
+
 Sphere::Sphere(Vector3d centroid, double radius) : Shape(Transform3d(centroid, Quaternion::IDENTITY())),
                                                    _radius(radius)
 {
 }
 
-Sphere::Sphere(Transform3d centroid, double radius) : Shape(centroid),
+Sphere::Sphere(math::Transform3d centroid, double radius) : Shape(centroid),
                                                       _radius(radius)
 {
 }

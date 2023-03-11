@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-/*
+
 #include "math/Vector3d.hpp"
 
 TEST(vector3d_test, set)
@@ -15,10 +15,4 @@ TEST(vector3d_test, set)
     {
         EXPECT_EQ(v[i], 1.0);
     }
-}
-*/
-
-TEST(example_test, gtest_work)
-{
-    EXPECT_EQ(0.0, 0.0);
 }

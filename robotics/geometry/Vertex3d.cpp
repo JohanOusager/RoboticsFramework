@@ -1,5 +1,8 @@
 #include "geometry/Vertex3d.hpp"
 
+using namespace geometry;
+using namespace math;
+
 Vertex3d::Vertex3d()
 {
     _position = Vector3d::ZERO();
